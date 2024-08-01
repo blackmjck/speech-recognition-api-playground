@@ -15,7 +15,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #ff5050;
   text-decoration: inherit;
 }
 a:hover {
@@ -58,11 +58,31 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #ff5050;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto #ff5050;
+}
+
+.listening .controls button {
+  background-color: hsla(0, 100%, 66%, 0.05);
+  border-color: #ff5050;
+}
+
+.listening .controls button::after {
+  color: #ff5050;
+  content: '\e029';
+  display: inline-block;
+  font-family: 'Material Symbols Outlined';
+  font-size: 1.2rem;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  padding-left: 0.5rem;
+  vertical-align: middle;
 }
 
 @media (prefers-color-scheme: light) {
@@ -81,10 +101,11 @@ button:focus-visible {
 output {
   border: 1px solid rgba(255, 255, 255, 0.87);
   border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  margin: 4rem auto 0;
-  padding: 0.5rem;
+  margin: 6rem auto 0;
+  min-width: 14.5rem;
+  padding: 0.5rem 1rem;
   position: relative;
 }
 output::before {
@@ -94,7 +115,7 @@ output::before {
   font-size: 1.2rem;
   position: absolute;
   text-align: center;
-  top: -2.75rem;
+  top: -3.25rem;
   width: 100%;
 }
 output:empty {

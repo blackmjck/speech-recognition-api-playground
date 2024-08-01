@@ -12,12 +12,13 @@ if (typeof SpeechRecognition !== 'undefined') {
   isSupported = true;
 }
 
+const $app = document.getElementById('app');
 const $btn = document.getElementById('start');
 const $output = document.getElementById('results');
 
 if (isSupported && ctor) {
   const recognition = new ctor();
-  recognition.continuous = false;
+  recognition.continuous = true;
   recognition.lang = 'en-US';
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
@@ -25,6 +26,7 @@ if (isSupported && ctor) {
   $btn!.addEventListener('click', handleClick);
 
   function toggleDisplay(listening: boolean): void {
+    $app?.classList.toggle('listening');
     if (listening) {
       recognition.stop();
       $btn!.innerText = 'Start listening again';
@@ -43,15 +45,12 @@ if (isSupported && ctor) {
   recognition.addEventListener('result', (evt) => {
     console.log('Result:', evt);
 
-    const text = evt.results[0][0].transcript;
+    const text = evt.results[evt.results.length - 1][0].transcript;
     if (text) {
       const p = document.createElement('p');
       p.textContent = '"' + text + '"';
       $output!.append(p);
     }
-
-    // turn it back off
-    toggleDisplay(true);
   });
 } else {
   $btn!.remove();
